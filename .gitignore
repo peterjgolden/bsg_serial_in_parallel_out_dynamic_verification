@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+
+sim_build/
+results.xml
+
+*.log
+*.out
+*.vcd
+*.vvp
+*.fst
+*.vcdplus
+*.vpd
+
+basejump_stl/
