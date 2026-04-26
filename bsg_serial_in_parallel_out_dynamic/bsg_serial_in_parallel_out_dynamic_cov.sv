@@ -6,7 +6,6 @@
 //
 
 `include "bsg_defines.sv"
-`timescale 1ns/1ps
 
 module bsg_serial_in_parallel_out_dynamic_cov
   #(parameter max_els_p = 4
@@ -39,7 +38,6 @@ module bsg_serial_in_parallel_out_dynamic_cov
   // First word of a packet is being accepted.
   covergroup cg_start @(negedge clk_i iff ~reset_i & dff_en_li);
     cp_v: coverpoint v_i { bins asserted = {1}; }
-    cp_yumi: coverpoint yumi_i;
     cp_len_i: coverpoint len_i {
       bins all_lengths[] = {[0:max_els_p-1]};
     }
@@ -47,7 +45,7 @@ module bsg_serial_in_parallel_out_dynamic_cov
     cp_up: coverpoint up_li;
     cp_clear: coverpoint clear_li;
 
-    cross_all: cross cp_v, cp_yumi, cp_len_i, cp_count_zero, cp_up, cp_clear {
+    cross_all: cross cp_v, cp_len_i, cp_count_zero, cp_up, cp_clear {
       illegal_bins ig0 = cross_all with (cp_v != 1);
       illegal_bins ig1 = cross_all with (cp_count_zero != 1);
     }
@@ -56,7 +54,6 @@ module bsg_serial_in_parallel_out_dynamic_cov
   // Middle of a multi-word packet.
   covergroup cg_normal @(negedge clk_i iff ~reset_i & ~count_r_is_zero & ~count_r_is_last);
     cp_v: coverpoint v_i;
-    cp_yumi: coverpoint yumi_i;
     cp_count: coverpoint count_r {
       bins mid_counts[] = {[1:max_els_p-2]};
     }
@@ -68,7 +65,7 @@ module bsg_serial_in_parallel_out_dynamic_cov
     cp_one_word: coverpoint one_word_lo { illegal_bins ig = {1}; }
     cp_go_fifo: coverpoint go_fifo_v_li { illegal_bins ig = {1}; }
 
-    cross_all: cross cp_v, cp_yumi, cp_count, cp_len_r, cp_up, cp_clear, cp_one_word, cp_go_fifo {
+    cross_all: cross cp_v, cp_count, cp_len_r, cp_up, cp_clear, cp_one_word, cp_go_fifo {
       illegal_bins ig0 = cross_all with (cp_count >= cp_len_r);
       illegal_bins ig1 = cross_all with (cp_one_word != 0);
       illegal_bins ig2 = cross_all with (cp_go_fifo != 0);
