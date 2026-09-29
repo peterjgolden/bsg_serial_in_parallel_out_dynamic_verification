@@ -38,8 +38,7 @@ module bsg_serial_in_parallel_out_dynamic_wrapper
      );
 
   bsg_serial_in_parallel_out_dynamic_cov
-    #(.width_p(width_p)
-      ,.max_els_p(max_els_p)
+    #(.max_els_p(max_els_p)
       ,.lg_max_els_lp(lg_max_els_lp)
       ) cov
     (.clk_i(clk_i)

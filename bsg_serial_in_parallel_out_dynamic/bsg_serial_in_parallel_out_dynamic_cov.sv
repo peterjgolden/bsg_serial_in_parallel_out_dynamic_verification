@@ -17,6 +17,9 @@ module bsg_serial_in_parallel_out_dynamic_cov
 
    // selected DUT interface/control signals
    , input v_i
+   , input ready_and_o
+   , input len_ready_o
+   , input v_o
    , input yumi_i
    , input [lg_max_els_lp-1:0] len_i
 
