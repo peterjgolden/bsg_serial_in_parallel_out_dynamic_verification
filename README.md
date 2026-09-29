@@ -22,9 +22,3 @@ parallel output packet. The packet length is provided on the first word.
   Functional coverage file.
 - `bsg_serial_in_parallel_out_dynamic/Makefile`
   Simulation makefile for cocotb.
-
-## Notes
-
-- The local `basejump_stl` clone is intentionally ignored by git.
-- This repository is focused on the verification environment and coverage work,
-  not on vendoring the full upstream BaseJump STL codebase.
